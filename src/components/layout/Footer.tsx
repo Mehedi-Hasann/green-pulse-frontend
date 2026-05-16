@@ -4,7 +4,7 @@ import { Leaf, Globe, Mail, Info } from 'lucide-react';
 export default function Footer() {
   return (
     <footer className="w-full border-t bg-slate-50 dark:bg-slate-900">
-      <div className="container py-12 md:py-16">
+      <div className="container mx-auto px-6 sm:px-12 lg:px-16 py-12 md:py-16">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center space-x-2">

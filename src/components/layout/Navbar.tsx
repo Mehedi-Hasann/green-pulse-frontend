@@ -22,8 +22,8 @@ const navLinks = [
   { name: 'Challenges', href: '/challenges' },
   { name: 'Leaderboard', href: '/leaderboard' },
   { name: 'About', href: '/about' },
-  { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
+
 ];
 
 export default function Navbar() {
@@ -54,7 +54,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container mx-auto px-6 sm:px-12 lg:px-16 flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <Leaf className="h-6 w-6 text-green-600" />
           <span className="text-xl font-bold tracking-tight text-green-700">Green Pulse</span>
@@ -73,6 +73,16 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
+          {isAuthenticated && (
+            <Link
+              href={getDashboardHref()}
+              className={`text-sm font-bold transition-colors hover:text-green-600 ${
+                pathname.startsWith('/dashboard') ? 'text-green-600' : 'text-muted-foreground'
+              }`}
+            >
+              Dashboard
+            </Link>
+          )}
         </div>
 
         <div className="flex items-center space-x-4">
@@ -80,41 +90,6 @@ export default function Navbar() {
             <div className="h-10 w-10 animate-pulse rounded-full bg-slate-200" />
           ) : isAuthenticated ? (
             <div className="flex items-center space-x-3">
-              {getRoleBadge()}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-10 w-10 rounded-full ring-2 ring-green-100 ring-offset-2 transition-all hover:ring-green-300">
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage src={user?.profileImage} alt={user?.name} />
-                      <AvatarFallback className="bg-green-600 text-white font-bold">{user?.name?.charAt(0).toUpperCase()}</AvatarFallback>
-                    </Avatar>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end">
-                  <DropdownMenuLabel className="font-normal">
-                    <div className="flex flex-col space-y-1">
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm font-medium leading-none">{user?.name}</p>
-                      </div>
-                      <p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild className="cursor-pointer">
-                    <Link href={getDashboardHref()} className="flex w-full items-center">
-                      <LayoutDashboard className="mr-2 h-4 w-4" />
-                      <span>Dashboard</span>
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild className="cursor-pointer">
-                    <Link href="/dashboard/member/profile" className="flex w-full items-center">
-                      <User className="mr-2 h-4 w-4" />
-                      <span>Profile</span>
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              
               <Button 
                 variant="outline" 
                 size="sm" 
@@ -166,21 +141,20 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            {isAuthenticated && (
+              <Link
+                href={getDashboardHref()}
+                className={`text-sm font-bold transition-colors hover:text-green-600 ${
+                  pathname.startsWith('/dashboard') ? 'text-green-600' : 'text-muted-foreground'
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                Dashboard
+              </Link>
+            )}
             {isAuthenticated ? (
               <div className="flex flex-col space-y-4 pt-2">
-                <div className="flex items-center space-x-3 px-2 py-3 bg-slate-50 rounded-lg">
-                  <Avatar className="h-12 w-12 ring-2 ring-green-100">
-                    <AvatarImage src={user?.profileImage} alt={user?.name} />
-                    <AvatarFallback className="bg-green-600 text-white font-bold">{user?.name?.charAt(0).toUpperCase()}</AvatarFallback>
-                  </Avatar>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-bold text-slate-900">{user?.name}</span>
-                    <span className="text-xs text-muted-foreground">{user?.email}</span>
-                    <span className="mt-1 inline-flex w-fit items-center rounded-full bg-green-100 px-2 py-0.5 text-[10px] font-semibold text-green-700">
-                      {user?.role?.replace('_', ' ')}
-                    </span>
-                  </div>
-                </div>
+
                 <Link
                   href={getDashboardHref()}
                   className="flex items-center px-2 text-sm font-medium text-muted-foreground hover:text-green-600"

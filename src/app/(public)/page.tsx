@@ -98,71 +98,146 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       {/* 1. Hero Section */}
-      <section className="relative flex min-h-[70vh] items-center overflow-hidden bg-white py-12 lg:py-20">
-        <div className="container relative z-10">
-          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
-            >
-              🌱 Join 10,000+ eco-warriors today
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-6 text-5xl font-extrabold tracking-tight text-slate-900 sm:text-7xl lg:max-w-3xl"
-            >
-              Small Actions, <span className="text-green-600">Global</span> Impact
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-6 text-xl leading-8 text-slate-600 lg:max-w-xl"
-            >
-              The ultimate platform for sustainable living. Join challenges, 
-              track your environmental footprint, and earn rewards for being green.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-4 lg:justify-start"
-            >
-              <Button size="lg" className="h-14 bg-green-600 px-10 text-lg hover:bg-green-700 shadow-lg shadow-green-200" asChild>
-                <Link href="/challenges">
-                  Join a Challenge <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" className="h-14 px-10 text-lg border-2" asChild>
-                <Link href="/about">How it Works</Link>
-              </Button>
-            </motion.div>
-          </div>
+      <section className="relative flex min-h-[85vh] items-center overflow-hidden bg-white pb-24 pt-10 lg:pt-40">
+        {/* Background Elements */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-50/40 blur-[120px]" />
+          <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-blue-50/20 blur-[100px]" />
+          <div className="absolute top-1/4 right-1/4 h-[300px] w-[300px] rounded-full bg-yellow-50/10 blur-[80px]" />
         </div>
 
-        {/* Hero Background Animation */}
-        <div className="absolute right-0 top-0 -z-10 hidden h-full w-1/2 lg:block">
-           <motion.div 
-             animate={{ 
-               rotate: [0, 5, 0],
-               scale: [1, 1.05, 1]
-             }}
-             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-             className="relative h-full w-full"
-           >
-             <div className="absolute top-1/2 left-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-100/50 blur-3xl" />
-             <div className="absolute top-1/4 left-1/3 h-[300px] w-[300px] rounded-full bg-blue-50/50 blur-3xl" />
-           </motion.div>
+        <div className="container max-w-7xl mx-auto relative z-10 px-6 sm:px-12 lg:px-16">
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+            {/* Content Left */}
+            <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="inline-flex items-center rounded-full bg-white/80 backdrop-blur-md px-4 py-2 text-sm font-bold text-green-700 shadow-sm ring-1 ring-green-100 mb-10"
+              >
+                <span className="mr-2 flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                Join 10,000+ eco-warriors today
+              </motion.div>
+              
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="text-4xl font-black tracking-tight text-slate-900 sm:text-6xl lg:text-[4.5rem] leading-[1.1] mb-10"
+              >
+                Small Actions, <br />
+                <span className="bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent italic">Global</span> Impact
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="text-lg leading-relaxed text-slate-500 lg:max-w-lg mb-12"
+              >
+                The ultimate platform for sustainable living. Join actionable challenges, 
+                track your environmental footprint, and earn rewards for protecting our planet.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex flex-wrap justify-center gap-5 lg:justify-start"
+              >
+                <Button size="lg" className="h-16 rounded-2xl bg-slate-900 px-10 text-lg font-black hover:bg-green-600 transition-all hover:scale-[1.02] shadow-2xl shadow-slate-200" asChild>
+                  <Link href="/challenges">
+                    Start Your Journey <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" className="h-16 rounded-2xl px-10 text-lg font-bold border-2 border-slate-100 hover:bg-slate-50 transition-all" asChild>
+                  <Link href="/about">See How it Works</Link>
+                </Button>
+              </motion.div>
+
+              {/* Trust Indicators */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="mt-14 flex items-center gap-6"
+              >
+                <div className="flex -space-x-3">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="h-10 w-10 rounded-full border-2 border-white bg-slate-100 overflow-hidden ring-2 ring-slate-50">
+                      <Image src={`https://i.pravatar.cc/100?u=${i}`} alt="user" width={40} height={40} />
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs font-bold text-slate-400">
+                  <span className="text-slate-900">4.9/5</span> from over 1k reviews
+                </p>
+              </motion.div>
+            </div>
+
+            {/* Visual Right */}
+            <div className="relative flex items-center justify-center lg:justify-end">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.85, rotate: 3 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className="relative h-[400px] w-[400px] lg:h-[550px] lg:w-[550px]"
+              >
+                {/* Floating Elements */}
+                <motion.div
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-6 -left-6 z-20 bg-white/90 backdrop-blur-xl p-4 rounded-2xl shadow-2xl border border-white/50"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-xl bg-green-100 flex items-center justify-center">
+                      <Leaf className="h-5 w-5 text-green-600" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-black text-slate-900">+120 Points</p>
+                      <p className="text-[9px] font-bold text-slate-400 uppercase">Verified</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  animate={{ y: [0, 15, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute bottom-6 -right-3 z-20 bg-slate-900 p-4 rounded-2xl shadow-2xl"
+                >
+                  <div className="flex items-center gap-3 text-white">
+                    <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center">
+                      <Trophy className="h-5 w-5 text-yellow-400" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-black italic text-green-400">Rank #1</p>
+                      <p className="text-[9px] font-bold text-slate-400 uppercase">Weekly</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Main Illustration */}
+                <div className="relative h-full w-full rounded-[3.5rem] overflow-hidden shadow-[0_30px_80px_-15px_rgba(22,163,74,0.2)] border-8 border-white">
+                  <Image 
+                    src="/images/hero-eco.png" 
+                    alt="Eco Illustration" 
+                    fill 
+                    priority
+                    className="object-cover"
+                  />
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* 2. Statistics Section */}
       <section className="bg-green-900 py-16 text-white">
-        <div className="container">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {stats.map((stat, i) => (
               <motion.div
@@ -186,7 +261,7 @@ export default function HomePage() {
 
       {/* 3. Features Section */}
       <section className="bg-slate-50 py-24 sm:py-32">
-        <div className="container">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-base font-semibold leading-7 text-green-600">Why Green Pulse?</h2>
             <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl">
@@ -222,7 +297,7 @@ export default function HomePage() {
 
       {/* 4. Categories Section */}
       <section className="py-24 bg-white">
-        <div className="container">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16">
           <div className="flex flex-col items-center justify-between gap-6 sm:flex-row mb-12">
             <div>
               <h2 className="text-3xl font-bold text-slate-900">Explore by Interest</h2>
@@ -261,7 +336,7 @@ export default function HomePage() {
 
       {/* 5. Testimonials Section */}
       <section className="bg-slate-900 py-24">
-        <div className="container">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16">
           <div className="text-center mb-16">
             <h2 className="text-green-400 font-semibold mb-2">Community Voices</h2>
             <p className="text-3xl font-bold text-white sm:text-4xl">Trusted by Eco-Warriors</p>
@@ -303,7 +378,7 @@ export default function HomePage() {
 
       {/* 6. Blog Section */}
       <section className="py-24 bg-white">
-        <div className="container">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16">
           <div className="flex flex-col items-center justify-between gap-6 sm:flex-row mb-12">
             <div>
               <h2 className="text-3xl font-bold text-slate-900">Latest Insights</h2>
