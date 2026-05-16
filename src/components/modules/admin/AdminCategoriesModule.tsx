@@ -75,7 +75,6 @@ export function AdminCategoriesModule({ categories }: { categories: any }) {
                 <TableHead>Name</TableHead>
                 <TableHead>Description</TableHead>
                 <TableHead>Challenges Count</TableHead>
-                <TableHead>Status</TableHead>
                 <TableHead>Created</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
@@ -90,12 +89,8 @@ export function AdminCategoriesModule({ categories }: { categories: any }) {
                     </div>
                   </TableCell>
                   <TableCell>{category.description}</TableCell>
-                  <TableCell>{category.challengesCount || 0}</TableCell>
-                  <TableCell>
-                    <Badge variant={category.isActive ? 'default' : 'secondary'}>
-                      {category.isActive ? 'Active' : 'Inactive'}
-                    </Badge>
-                  </TableCell>
+                  <TableCell className='ml-5'>{category.challengesCount || 0}</TableCell>
+             
                   <TableCell>
                     {category.createdAt ? new Date(category.createdAt).toLocaleDateString() : 'N/A'}
                   </TableCell>

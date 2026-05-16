@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -72,10 +73,36 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
+const SLIDES = [
+  {
+    image: '/images/eco-login-bg.png',
+    quote: "Being part of Green Pulse has allowed me to track my environmental impact and connect with a community that actually cares about the future.",
+    author: "Sofia Davis, Eco-Warrior"
+  },
+  {
+    image: '/images/eco-city-bg.png',
+    quote: "The future is green. Join us in building a sustainable world where technology and nature coexist in perfect harmony.",
+    author: "Alex Chen, Sustainability Expert"
+  },
+  {
+    image: '/images/hero-eco.png',
+    quote: "Every small action counts. Together we can create a massive wave of positive change for our planet.",
+    author: "Maria Garcia, Climate Advocate"
+  }
+];
+
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { setUser, setToken } = useAuthStore();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -151,20 +178,62 @@ export default function LoginPage() {
 
   return (
     <div className="container relative flex min-h-[calc(100vh-64px)] flex-col items-center justify-center py-12 lg:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-        <div className="absolute inset-0 bg-green-900" />
+      <div className="relative hidden h-full flex-col p-10 text-white dark:border-r lg:flex">
+        {/* Overlays for text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-green-950/90 via-green-900/40 to-black/30 z-10" />
+        
+        {/* Background Image Slider */}
+        <div className="absolute inset-0 overflow-hidden">
+          {SLIDES.map((slide, index) => (
+            <Image
+              key={index}
+              src={slide.image}
+              alt="Eco Background"
+              fill
+              priority={index === 0}
+              sizes="(max-width: 1024px) 0vw, 50vw"
+              className={`object-cover transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          ))}
+        </div>
         <div className="relative z-20 flex items-center text-lg font-medium">
           <Leaf className="mr-2 h-6 w-6" />
           Green Pulse
         </div>
         <div className="relative z-20 mt-auto">
-          <blockquote className="space-y-2">
-            <p className="text-lg">
-              &ldquo;Being part of Green Pulse has allowed me to track my environmental impact 
-              and connect with a community that actually cares about the future.&rdquo;
-            </p>
-            <footer className="text-sm">Sofia Davis, Eco-Warrior</footer>
-          </blockquote>
+          <div className="space-y-4">
+            <div className="relative h-[120px]">
+              {SLIDES.map((slide, index) => (
+                <blockquote 
+                  key={index} 
+                  className={`absolute inset-0 space-y-2 transition-all duration-1000 ${
+                    index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+                  }`}
+                >
+                  <p className="text-lg">
+                    &ldquo;{slide.quote}&rdquo;
+                  </p>
+                  <footer className="text-sm">{slide.author}</footer>
+                </blockquote>
+              ))}
+            </div>
+            
+            {/* Slider Indicators */}
+            <div className="flex gap-2 pt-4">
+              {SLIDES.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                    index === currentSlide ? 'w-6 bg-white' : 'w-2 bg-white/40 hover:bg-white/60'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
       

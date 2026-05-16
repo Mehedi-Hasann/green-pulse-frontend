@@ -29,6 +29,7 @@ export function CreateChallengeForm({ categories }: { categories: any[] }) {
   const [isPaid, setIsPaid] = useState('Free');
   const [price, setPrice] = useState('');
   const [status, setStatus] = useState('UPCOMING');
+  const [file, setFile] = useState<File | null>(null);
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -50,12 +51,17 @@ export function CreateChallengeForm({ categories }: { categories: any[] }) {
     };
     
 
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(payload));
+    if (file) {
+      formData.append('file', file);
+    }
+
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/super-admin/challenges`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/challenge`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify(payload),
+        body: formData,
       });
 
       const data = await res.json();
@@ -110,6 +116,17 @@ export function CreateChallengeForm({ categories }: { categories: any[] }) {
                 onChange={(e) => setDescription(e.target.value)}
                 required
                 className="min-h-[60px] resize-none"
+              />
+            </div>
+
+            <div className="space-y-1 md:col-span-2">
+              <Label htmlFor="image" className="text-sm">Challenge Image (Optional)</Label>
+              <Input
+                id="image"
+                type="file"
+                accept="image/*"
+                onChange={(e) => setFile(e.target.files?.[0] || null)}
+                disabled={loading}
               />
             </div>
 
