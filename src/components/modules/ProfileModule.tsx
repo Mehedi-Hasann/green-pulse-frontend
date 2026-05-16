@@ -49,6 +49,7 @@ const profileSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileSchema>;
 
 export function ProfileModule({ initialUser }: { initialUser: any }) {
+  console.log('initail user',initialUser)
   const router = useRouter();
   const { setUser } = useAuthStore();
   const [isLoading, setIsLoading] = useState(false);
@@ -58,11 +59,11 @@ export function ProfileModule({ initialUser }: { initialUser: any }) {
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
-    defaultValues: {
+    values: {
       name: user?.name || '',
       email: user?.email || '',
-      phoneNumber: user?.phoneNumber || user?.contactNumber || user?.phone || '',
-      gender: (user?.gender as any) || '',
+      phoneNumber: user?.member?.contactNumber || user?.admin?.contactNumber || user?.superAdmin?.contactNumber || user?.phoneNumber || '',
+      gender: (user?.member?.gender as any) || (user?.admin?.gender as any) || (user?.superAdmin?.gender as any) || (user?.gender as any) || '',
     },
   });
 

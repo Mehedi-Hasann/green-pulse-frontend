@@ -18,9 +18,9 @@ export const getSingleMemberChallenge = async (id: string) => {
   return await memberChallengeService.getSingleMemberChallenge(id, cookieStore.toString());
 };
 
-export const getMemberChallengesByMemberId = async (memberId: string) => {
+export const getMyChallengesByMemberId = async () => {
   const cookieStore = await cookies();
-  return await memberChallengeService.getMemberChallengesByMemberId(memberId, cookieStore.toString());
+  return await memberChallengeService.getMyChallengesByMemberId(cookieStore.toString());
 };
 
 export const updateMemberChallenge = async (id: string, payload: any) => {

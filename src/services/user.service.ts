@@ -57,6 +57,7 @@ export const userService = {
   },
   getMe: async function () {
     try {
+      // console.log("Profile for")
       const cookieStore = await cookies();
       const res = await fetch(`${API_URL}/auth/me`, {
         method: "GET",

@@ -9,14 +9,11 @@ export default async function AdminOverviewPage() {
     getPendingSubmissions()
   ]);
 
-  const res = await getPendingSubmissions();
-  console.log(res.data.data)
-
   return (
     <div>
       <AdminOverviewModule 
         summaryData={summaryRes?.data?.data || summaryRes?.data} 
-        pendingSubmissions={res?.data} 
+        pendingSubmissions={submissionsRes?.data} 
       />
     </div>
   );

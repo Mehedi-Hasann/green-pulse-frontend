@@ -61,6 +61,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { login } from '@/actions/auth.actions';
+import { authService } from '@/services/auth.service';
 import { useAuthStore } from '@/store/useAuthStore';
 import { Separator } from '@/components/ui/separator';
 
@@ -242,7 +243,11 @@ export default function LoginPage() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <Button variant="outline" className="h-11 rounded-xl">
+                <Button 
+                  variant="outline" 
+                  className="h-11 rounded-xl"
+                  onClick={() => authService.googleLogin()}
+                >
                   <Chrome className="mr-2 h-4 w-4" /> Google
                 </Button>
                 <Button variant="outline" className="h-11 rounded-xl">

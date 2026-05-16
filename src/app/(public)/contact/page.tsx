@@ -63,8 +63,8 @@ export default function ContactPage() {
   return (
     <div className="bg-slate-50 min-h-screen">
       {/* Contact Header */}
-      <section className="bg-white border-b py-20 relative overflow-hidden">
-        <div className="container relative z-10 text-center">
+      <section className="bg-white border-b py-24 relative overflow-hidden">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -89,8 +89,8 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Content */}
-      <section className="py-20">
-        <div className="container">
+      <section className="py-24">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             {/* Contact Info Cards */}
             <div className="lg:col-span-5 space-y-8">
@@ -228,7 +228,7 @@ export default function ContactPage() {
 
       {/* FAQ Summary */}
       <section className="py-24 bg-white">
-        <div className="container">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-5xl font-black text-slate-900 mb-4 tracking-tight">Quick Answers</h2>
             <p className="text-slate-500">Check these common questions before reaching out.</p>

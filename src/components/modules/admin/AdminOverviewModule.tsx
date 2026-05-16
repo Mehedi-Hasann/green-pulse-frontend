@@ -153,33 +153,35 @@ export function AdminOverviewModule({ summaryData, pendingSubmissions }: { summa
             <CardDescription>Daily proof submissions across all challenges</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-[300px] w-full">
+            <div className="h-[300px] w-full min-h-[300px]">
               {mounted ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={submissionActivity}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                    <XAxis 
-                      dataKey="day" 
-                      axisLine={false} 
-                      tickLine={false} 
-                      tick={{ fill: '#64748b', fontSize: 12 }}
-                    />
-                    <YAxis 
-                      axisLine={false} 
-                      tickLine={false} 
-                      tick={{ fill: '#64748b', fontSize: 12 }}
-                    />
-                    <Tooltip 
-                      cursor={{ fill: '#f8fafc' }}
-                      contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
-                    />
-                    <Bar dataKey="submissions" fill="#10b981" radius={[6, 6, 0, 0]} barSize={40}>
-                      {submissionActivity.map((entry: any, index: number) => (
-                        <Cell key={`cell-${index}`} fill={entry.submissions > 0 ? '#059669' : '#10b981'} />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
+                <div style={{ width: '100%', height: '100%' }}>
+                  <ResponsiveContainer width="100%" height="100%" minHeight={300}>
+                    <BarChart data={submissionActivity}>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                      <XAxis 
+                        dataKey="day" 
+                        axisLine={false} 
+                        tickLine={false} 
+                        tick={{ fill: '#64748b', fontSize: 12 }}
+                      />
+                      <YAxis 
+                        axisLine={false} 
+                        tickLine={false} 
+                        tick={{ fill: '#64748b', fontSize: 12 }}
+                      />
+                      <Tooltip 
+                        cursor={{ fill: '#f8fafc' }}
+                        contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
+                      />
+                      <Bar dataKey="submissions" fill="#10b981" radius={[6, 6, 0, 0]} barSize={40}>
+                        {submissionActivity.map((entry: any, index: number) => (
+                          <Cell key={`cell-${index}`} fill={entry.submissions > 0 ? '#059669' : '#10b981'} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
               ) : (
                 <div className="w-full h-full bg-slate-50 animate-pulse rounded-xl" />
               )}

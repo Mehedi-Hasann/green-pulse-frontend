@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation';
 
 
 export function AdminChallengesModule({ challenges }: { challenges: any }) {
+  console.log("challes are all ",challenges)
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const router = useRouter();
 

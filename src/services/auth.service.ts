@@ -61,6 +61,7 @@ export const authService = {
       };
       if (cookieString) headers.Cookie = cookieString;
 
+      // const authBaseUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/v1', '') || 'http://localhost:5000/api';
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/get-session`, {
         method: "GET",
         credentials: "include",
@@ -135,6 +136,12 @@ export const authService = {
       return { success: res.ok, data: result, error: !res.ok ? result : null };
     } catch (error) {
       return { success: false, data: null, error: { message: "Reset failed." } };
+    }
+  },
+
+  googleLogin: function () {
+    if (typeof window !== "undefined") {
+      window.location.href = `${API_URL}/auth/login/google`;
     }
   },
 };

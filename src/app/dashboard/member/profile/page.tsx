@@ -8,9 +8,11 @@ export default async function ProfileEditPage() {
   const me = await getMe();
   const user = me?.data;
 
-  if (!user) {
-    redirect("/login");
-  }
+  // console.log(user)
+
+  // if (!user) {
+  //   redirect("/login");
+  // }
 
   return (
     <div>

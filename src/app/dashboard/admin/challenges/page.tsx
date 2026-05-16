@@ -10,7 +10,7 @@ export default async function AdminChallengesPage() {
 
   return (
     <div>
-      <AdminChallengesModule challenges={challengesRes.data.data} />
+      <AdminChallengesModule challenges={challengesRes.data.data.data} />
     </div>
   );
 }

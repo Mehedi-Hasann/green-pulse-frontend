@@ -62,7 +62,7 @@ export function ChallengesModule({ challenges, categories }: { challenges: any, 
   const categoryList = categories?.data?.data || (Array.isArray(categories?.data) ? categories.data : []);
 
   return (
-    <div className="container py-12 min-h-screen">
+    <div className="container mx-auto px-6 sm:px-12 lg:px-16 py-12 min-h-screen">
       {/* Header & Description
       <div className="mb-12 text-center max-w-3xl mx-auto">
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl mb-4">

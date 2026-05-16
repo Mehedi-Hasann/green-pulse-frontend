@@ -49,7 +49,7 @@ export default function AboutPage() {
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 overflow-hidden bg-slate-900 text-white">
-        <div className="container relative z-10">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
           <div className="max-w-3xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -87,7 +87,7 @@ export default function AboutPage() {
 
       {/* Stats Section */}
       <section className="py-12 bg-green-600">
-        <div className="container">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
               <motion.div
@@ -108,7 +108,7 @@ export default function AboutPage() {
 
       {/* Values Section */}
       <section className="py-24 bg-white">
-        <div className="container">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-5xl font-black text-slate-900 mb-4">Our Core Values</h2>
             <p className="text-slate-500 max-w-2xl mx-auto">
@@ -139,7 +139,7 @@ export default function AboutPage() {
 
       {/* Story Section */}
       <section className="py-24 bg-slate-50">
-        <div className="container">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -188,7 +188,7 @@ export default function AboutPage() {
 
       {/* Team Section */}
       <section className="py-24 bg-white">
-        <div className="container">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-5xl font-black text-slate-900 mb-4">Meet the Visionaries</h2>
             <p className="text-slate-500 max-w-2xl mx-auto">
@@ -224,7 +224,7 @@ export default function AboutPage() {
 
       {/* CTA Section */}
       <section className="py-24 bg-green-900">
-        <div className="container text-center text-white">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16 text-center text-white">
           <h2 className="text-4xl lg:text-6xl font-black mb-8 tracking-tight">
             Ready to start your <span className="text-green-400">Green</span> journey?
           </h2>

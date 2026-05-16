@@ -1,6 +1,6 @@
 import { getMe } from "@/actions/auth.actions";
 import { getMemberStats } from "@/actions/member.actions";
-import { getMemberChallengesByMemberId } from "@/actions/member-challenge.actions";
+import { getMyChallengesByMemberId } from "@/actions/member-challenge.actions";
 import { getLeaderboard } from "@/actions/leaderboard.actions";
 import { MemberOverviewModule } from "@/components/modules/member/MemberOverviewModule";
 
@@ -14,7 +14,7 @@ export default async function MemberOverviewPage() {
   // Fetch data in parallel
   const [statsRes, activeChallengesRes, leaderboardRes] = await Promise.all([
     getMemberStats(),
-    memberId ? getMemberChallengesByMemberId(memberId) : Promise.resolve({ success: false, data: [] }),
+    memberId ? getMyChallengesByMemberId() : Promise.resolve({ success: false, data: [] }),
     getLeaderboard()
   ]);
 

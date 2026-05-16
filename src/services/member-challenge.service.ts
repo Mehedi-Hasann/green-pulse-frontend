@@ -79,14 +79,14 @@ export const memberChallengeService = {
     }
   },
 
-  getMemberChallengesByMemberId: async function (memberId: string, cookieString?: string) {
+  getMyChallengesByMemberId: async function (cookieString?: string) {
     try {
       const headers: Record<string, string> = {
         "Content-Type": "application/json",
       };
       if (cookieString) headers.Cookie = cookieString;
 
-      const res = await fetch(`${API_URL}/member-challenge/member/${memberId}`, {
+      const res = await fetch(`${API_URL}/member-challenge/my-challenge`, {
         method: "GET",
         credentials: "include",
         headers,
