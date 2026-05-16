@@ -41,7 +41,8 @@ export function AdminMembersModule({ users }: { users: any[] }) {
     setLoadingId(id);
 
     try {
-      const response = await fetch(`${API_URL}/users/${id}`, {
+      console.log("id is ",id)
+      const response = await fetch(`${API_URL}/super-admin/members/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -71,12 +72,7 @@ export function AdminMembersModule({ users }: { users: any[] }) {
           <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Manage Members</h1>
           <p className="text-slate-500">View and manage all platform members.</p>
         </div>
-        <div className="flex items-center gap-3">
-          <Button className="bg-slate-900 hover:bg-slate-800 h-11 px-6 rounded-xl font-bold">
-            <Users className="mr-2 h-4 w-4" />
-            Export Members
-          </Button>
-        </div>
+  
       </div>
 
       <Card className="border-none shadow-md bg-white">
@@ -92,7 +88,7 @@ export function AdminMembersModule({ users }: { users: any[] }) {
                 <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Verified</TableHead>
-                <TableHead>Password</TableHead>
+                <TableHead>Points</TableHead>
                 <TableHead>Joined</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
@@ -127,23 +123,15 @@ export function AdminMembersModule({ users }: { users: any[] }) {
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={user.emailVerified ? 'default' : 'secondary'}>
-                      {user.emailVerified ? 'Verified' : 'Unverified'}
+                    <Badge variant={user.verified ? 'default' : 'secondary'}>
+                      {user.verified ? 'Verified' : 'Unverified'}
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    {user.needPasswordChange ? (
-                      <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-1 text-[10px] font-semibold uppercase tracking-widest text-amber-700">
-                        <ShieldAlert className="mr-1 h-3.5 w-3.5" /> Change
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center rounded-full bg-emerald-100 px-2 py-1 text-[10px] font-semibold uppercase tracking-widest text-emerald-700">
-                        <ShieldCheck className="mr-1 h-3.5 w-3.5" /> OK
-                      </span>
-                    )}
+                    {user.points ?? 0}
                   </TableCell>
                   <TableCell>
-                    {new Date(user.createdAt).toLocaleDateString()}
+                    {new Date(user.joinedAt).toLocaleDateString()}
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">

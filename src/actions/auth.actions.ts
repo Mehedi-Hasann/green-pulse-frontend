@@ -97,7 +97,7 @@ export const getMe = async () => {
 
   if (sessionRes.success && userId) {
     const { userService } = await import("@/services/user.service");
-    const userRes = await userService.getSingleUser(userId);
+    const userRes = await userService.getMe();
     // console.log("getMe -> userRes:", JSON.stringify(userRes, null, 2));
     
     if (userRes.success) {

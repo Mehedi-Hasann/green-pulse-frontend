@@ -14,6 +14,10 @@ export const updateUser = async (id: string, payload: any) => {
   return await userService.updateUser(id, payload);
 };
 
+export const UpdateSuperAdminBySuperAdmin = async (id: string, payload: any) => {
+  return await userService.UpdateSuperAdminBySuperAdmin(id, payload);
+};
+
 export const deleteUser = async (id: string) => {
   return await userService.deleteUser(id);
 };

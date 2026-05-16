@@ -33,10 +33,11 @@ export default async function ChallengesPage({
     }),
     categoryService.getAllCategories()
   ]);
+  console.log("All Challenges is => ",challenges.data)
 
   return (
     <div>
-      <ChallengesModule challenges={challenges} categories={categories} />
+      <ChallengesModule challenges={challenges.data} categories={categories} />
     </div>
   );
 }

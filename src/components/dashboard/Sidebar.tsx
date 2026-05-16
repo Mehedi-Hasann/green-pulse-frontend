@@ -37,12 +37,14 @@ const adminLinks = [
   { name: 'Approve Submissions', href: '/dashboard/admin/submissions', icon: CheckSquare },
   // { name: 'Payments', href: '/dashboard/admin/payments', icon: CreditCard },
   { name: 'Analytics', href: '/dashboard/admin/analytics', icon: BarChart3 },
+  { name: 'Settings', href: '/dashboard/admin/profile', icon: Settings },
 ];
 
 const superAdminLinks = [
   { name: 'Overview', href: '/dashboard/super-admin', icon: LayoutDashboard },
   { name: 'Manage Admins', href: '/dashboard/super-admin/admins', icon: UserPlus },
   { name: 'System Analytics', href: '/dashboard/super-admin/analytics', icon: BarChart3 },
+  { name: 'Settings', href: '/dashboard/super-admin/profile', icon: Settings },
 ];
 
 export default function Sidebar() {
@@ -118,16 +120,54 @@ export default function Sidebar() {
           {(user?.role === 'ADMIN' || user?.role === 'SUPER_ADMIN') && (
             <div className="space-y-1">
               <p className="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-500">Administration</p>
-              {adminLinks.map((link) => {
+              {adminLinks
+                .filter((link) => (user?.role === 'SUPER_ADMIN' ? link.name !== 'Settings' : true))
+                .map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all ${
+                        isActive ? 'bg-blue-600 text-white' : 'hover:bg-slate-900 hover:text-white'
+                      }`}
+                    >
+                      <link.icon className={`mr-3 h-5 w-5 ${isActive ? 'text-white' : 'group-hover:text-white'}`} />
+                      {link.name}
+                    </Link>
+                  );
+                })}
+            </div>
+          )}
+
+          {user?.role !== 'ADMIN' && (
+            <div className="space-y-1">
+              <p className="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                {user?.role === 'MEMBER' ? 'My Dashboard' : 'Personal'}
+              </p>
+              {memberLinks.map((link) => {
                 const isActive = pathname === link.href;
+                
+                // Replace Overview with Sign out for Super Admin
+                if (user?.role === 'SUPER_ADMIN' && link.name === 'Overview') {
+                  return (
+                    <button
+                      key="sign-out"
+                      onClick={logout}
+                      className="group flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-all text-slate-400 hover:bg-slate-900 hover:text-red-400"
+                    >
+                      <LogOut className="mr-3 h-5 w-5 group-hover:text-red-400" />
+                      Sign out
+                    </button>
+                  );
+                }
+
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
                     className={`group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all ${
-                      isActive 
-                        ? 'bg-blue-600 text-white' 
-                        : 'hover:bg-slate-900 hover:text-white'
+                      isActive ? 'bg-green-600 text-white' : 'hover:bg-slate-900 hover:text-white'
                     }`}
                   >
                     <link.icon className={`mr-3 h-5 w-5 ${isActive ? 'text-white' : 'group-hover:text-white'}`} />

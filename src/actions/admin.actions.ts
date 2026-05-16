@@ -26,6 +26,10 @@ export const getAllUsers = async () => {
   return await userService.getAllUsers();
 };
 
+export const getAllMembers = async () => {
+  return await userService.getAllMembers();
+};
+
 export const getAllChallenges = async (params?: { categoryId?: string; type?: string; searchTerm?: string; sortBy?: string }) => {
   const cookieStore = await import("next/headers").then(m => m.cookies());
   return await challengeService.getAllChallenges(params, cookieStore.toString());

@@ -63,7 +63,7 @@ export function ChallengesModule({ challenges, categories }: { challenges: any, 
 
   return (
     <div className="container py-12 min-h-screen">
-      {/* Header & Description */}
+      {/* Header & Description
       <div className="mb-12 text-center max-w-3xl mx-auto">
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl mb-4">
           Eco <span className="text-green-600">Challenges</span>
@@ -72,7 +72,7 @@ export function ChallengesModule({ challenges, categories }: { challenges: any, 
           Join thousands of eco-warriors in actionable challenges that protect our planet. 
           Every small step counts towards a greener future.
         </p>
-      </div>
+      </div> */}
 
       {/* Filters Bar */}
       <div className="mb-10 bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-4 lg:flex-row lg:items-center">
@@ -179,54 +179,70 @@ export function ChallengesModule({ challenges, categories }: { challenges: any, 
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute left-3 top-3 flex gap-2">
-                    <Badge className={`${challenge.type === 'PAID' ? 'bg-blue-600' : 'bg-green-600'} border-none shadow-sm`}>
-                      {challenge.type}
+                  <div className="absolute left-3 top-3 flex flex-col gap-2">
+                    <Badge className={`${challenge.isPaid ? 'bg-blue-600' : 'bg-green-600'} border-none shadow-sm font-bold`}>
+                      {challenge.isPaid ? 'Premium' : 'Free'}
                     </Badge>
-                    {challenge.price && (
-                      <Badge variant="secondary" className="bg-white/90 backdrop-blur text-slate-900 border-none">
-                        ${challenge.price}
-                      </Badge>
-                    )}
+                    <Badge variant="secondary" className="bg-white/90 backdrop-blur text-slate-900 border-none font-bold uppercase text-[10px] tracking-widest">
+                      {challenge.status}
+                    </Badge>
+                  </div>
+                  <div className="absolute right-3 top-3">
+                    <div className="bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 border border-white/20">
+                      <Trophy className="h-4 w-4 text-amber-500 fill-current" />
+                      <span className="text-sm font-black text-slate-900">{challenge.points}</span>
+                    </div>
                   </div>
                 </div>
                 <CardHeader className="p-5 pb-0">
-                  <div className="mb-3 flex items-center justify-between">
-                    <Badge variant="outline" className="text-xs font-semibold uppercase tracking-wider text-green-600 border-green-100 bg-green-50">
-                      {challenge.category.name}
+                  <div className="mb-2">
+                    <Badge variant="outline" className="text-[10px] font-black uppercase tracking-[0.15em] text-green-600 border-green-200 bg-green-50/50 px-2 py-0.5">
+                      {challenge.category?.name || 'Uncategorized'}
                     </Badge>
-                    <div className="flex items-center text-sm font-bold text-amber-500">
-                      <Trophy className="mr-1 h-4 w-4 fill-current" />
-                      {challenge.points}
-                    </div>
                   </div>
-                  <CardTitle className="text-xl line-clamp-1 group-hover:text-green-600 transition-colors">
+                  <CardTitle className="text-xl font-bold line-clamp-1 group-hover:text-green-600 transition-colors">
                     {challenge.title}
                   </CardTitle>
-                  <CardDescription className="line-clamp-2 mt-2 text-slate-500">
+                  <CardDescription className="line-clamp-2 mt-2 text-slate-500 text-sm leading-relaxed">
                     {challenge.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="p-5 pt-4 mt-auto">
-                  <div className="flex items-center justify-between text-sm text-slate-500 bg-slate-50 p-3 rounded-xl">
-                    <div className="flex items-center">
-                      <Clock className="mr-2 h-4 w-4 text-slate-400" />
-                      <span>{challenge.duration} Days</span>
+                  <div className="grid grid-cols-2 gap-3 mb-4">
+                    <div className="flex flex-col p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Duration</span>
+                      <div className="flex items-center mt-0.5">
+                        <Clock className="mr-1.5 h-3.5 w-3.5 text-slate-400" />
+                        <span className="text-sm font-bold text-slate-700">{challenge.duration} Days</span>
+                      </div>
                     </div>
-                    <div className="h-4 w-[1px] bg-slate-200" />
-                    <div className="flex items-center">
-                      <Leaf className="mr-2 h-4 w-4 text-green-500" />
-                      <span>Verified</span>
+                    <div className="flex flex-col p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Rewards</span>
+                      <div className="flex items-center mt-0.5">
+                        <Leaf className="mr-1.5 h-3.5 w-3.5 text-green-500" />
+                        <span className="text-sm font-bold text-slate-700">{challenge.pointsPerDay} Pts/Day</span>
+                      </div>
                     </div>
                   </div>
+
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900 text-white">
+                    <div className="flex flex-col">
+                      {challenge.isPaid ? (
+                        <>
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">Challenge Price</span>
+                          <span className="text-sm font-black text-white">${challenge.price || 0}</span>
+                        </>
+                      ) : (
+                        <span className="text-sm font-black text-green-400 uppercase tracking-widest">Free</span>
+                      )}
+                    </div>
+                    <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg h-8 px-4 text-xs" asChild>
+                      <Link href={`/challenges/${challenge.id}`}>
+                        View Details
+                      </Link>
+                    </Button>
+                  </div>
                 </CardContent>
-                <CardFooter className="p-5 pt-0">
-                  <Button className="w-full h-11 bg-slate-900 hover:bg-green-600 text-white transition-colors rounded-xl font-bold" asChild>
-                    <Link href={`/challenges/${challenge.id}`}>
-                      View Details
-                    </Link>
-                  </Button>
-                </CardFooter>
               </Card>
             </motion.div>
           ))}

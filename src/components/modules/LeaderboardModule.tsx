@@ -10,6 +10,8 @@ import { motion } from 'framer-motion';
 export function LeaderboardModule({ leaderboard }: { leaderboard: any }) {
   const leaderboardData = leaderboard?.data?.data || (Array.isArray(leaderboard?.data) ? leaderboard.data : []);
 
+  console.log("leader boardf ",leaderboardData)
+
   const getRankIcon = (index: number) => {
     switch (index) {
       case 0:
@@ -43,9 +45,8 @@ export function LeaderboardModule({ leaderboard }: { leaderboard: any }) {
           </p>
         </div>
 
-        {/* Podium Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 items-end">
-          {/* 2nd Place */}
+
+        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 items-end">
           {leaderboardData[1] && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -67,14 +68,14 @@ export function LeaderboardModule({ leaderboard }: { leaderboard: any }) {
                 <h3 className="text-xl font-black text-slate-900 mb-1">{leaderboardData[1].name}</h3>
                 <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Silver Warrior</p>
                 <div className="bg-slate-50 mx-8 py-3 rounded-2xl">
-                  <p className="text-2xl font-black text-slate-900">{leaderboardData[1].points.toLocaleString()}</p>
+                  <p className="text-2xl font-black text-slate-900">{(leaderboardData[1].points || 0).toLocaleString()}</p>
                   <p className="text-[10px] font-black text-slate-400 uppercase">Points</p>
                 </div>
               </Card>
             </motion.div>
           )}
 
-          {/* 1st Place */}
+        
           {leaderboardData[0] && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -96,14 +97,14 @@ export function LeaderboardModule({ leaderboard }: { leaderboard: any }) {
                 <h3 className="text-2xl font-black mb-1 relative z-10">{leaderboardData[0].name}</h3>
                 <p className="text-sm font-bold text-green-400 uppercase tracking-widest mb-6 relative z-10">Grand Champion</p>
                 <div className="bg-white/10 mx-10 py-4 rounded-3xl backdrop-blur relative z-10 border border-white/10">
-                  <p className="text-3xl font-black">{leaderboardData[0].points.toLocaleString()}</p>
+                  <p className="text-3xl font-black">{(leaderboardData[0].points || 0).toLocaleString()}</p>
                   <p className="text-[10px] font-black text-white/50 uppercase tracking-widest">Total Points</p>
                 </div>
               </Card>
             </motion.div>
           )}
 
-          {/* 3rd Place */}
+         
           {leaderboardData[2] && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -125,20 +126,21 @@ export function LeaderboardModule({ leaderboard }: { leaderboard: any }) {
                 <h3 className="text-xl font-black text-slate-900 mb-1">{leaderboardData[2].name}</h3>
                 <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Bronze Warrior</p>
                 <div className="bg-amber-50 mx-8 py-3 rounded-2xl">
-                  <p className="text-2xl font-black text-slate-900">{leaderboardData[2].points.toLocaleString()}</p>
+                  <p className="text-2xl font-black text-slate-900">{(leaderboardData[2].points || 0).toLocaleString()}</p>
                   <p className="text-[10px] font-black text-slate-400 uppercase">Points</p>
                 </div>
               </Card>
             </motion.div>
           )}
-        </div>
+        </div> */}
+
 
         {/* Full Rankings Table */}
         <Card className="border-none shadow-xl rounded-[2.5rem] bg-white overflow-hidden">
           <CardHeader className="p-10 pb-6 border-b border-slate-50 flex flex-row items-center justify-between">
             <div>
               <CardTitle className="text-2xl font-black text-slate-900 tracking-tight">Global Rankings</CardTitle>
-              <CardDescription className="font-bold text-slate-400 uppercase tracking-widest text-[10px] mt-1">Live updates every 15 minutes</CardDescription>
+              <CardDescription className="font-bold text-slate-400 uppercase tracking-widest text-[10px] mt-1">Eco Warriors Hall of Fame</CardDescription>
             </div>
             <div className="hidden sm:flex items-center gap-2 text-green-600 bg-green-50 px-4 py-2 rounded-xl border border-green-100">
               <TrendingUp className="h-4 w-4" />
@@ -151,13 +153,12 @@ export function LeaderboardModule({ leaderboard }: { leaderboard: any }) {
                 <TableRow className="border-none hover:bg-transparent">
                   <TableHead className="w-[100px] font-black text-slate-900 p-6 uppercase tracking-widest text-[10px]">Rank</TableHead>
                   <TableHead className="font-black text-slate-900 p-6 uppercase tracking-widest text-[10px]">Member</TableHead>
-                  <TableHead className="font-black text-slate-900 p-6 uppercase tracking-widest text-[10px]">Role</TableHead>
                   <TableHead className="text-right font-black text-slate-900 p-6 uppercase tracking-widest text-[10px]">Points</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {leaderboardData.map((user: any, index: number) => (
-                  <TableRow key={user.id} className="border-slate-50 hover:bg-slate-50/80 transition-colors group">
+                {leaderboardData.map((member: any, index: number) => (
+                  <TableRow key={member.id} className="border-slate-50 hover:bg-slate-50/80 transition-colors group">
                     <TableCell className="p-6">
                       <div className="flex items-center justify-center">
                         {getRankIcon(index)}
@@ -166,21 +167,18 @@ export function LeaderboardModule({ leaderboard }: { leaderboard: any }) {
                     <TableCell className="p-6">
                       <div className="flex items-center gap-4">
                         <Avatar className="h-12 w-12 border-2 border-white shadow-sm ring-2 ring-slate-100">
-                          <AvatarImage src={`https://i.pravatar.cc/100?u=${user.id}`} />
-                          <AvatarFallback className="font-bold">{user.name[0]}</AvatarFallback>
+                          <AvatarImage src={member.profilePhoto || `https://i.pravatar.cc/100?u=${member.id}`} />
+                          <AvatarFallback className="font-bold">{member.name?.[0]}</AvatarFallback>
                         </Avatar>
                         <div>
-                          <p className="font-black text-slate-900 group-hover:text-green-600 transition-colors">{user.name}</p>
-                          <p className="text-[10px] font-bold text-slate-400 uppercase">Joined 2024</p>
+                          <p className="font-black text-slate-900 group-hover:text-green-600 transition-colors">{member.name}</p>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase">Impact Warrior</p>
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell className="p-6">
-                      <Badge variant="outline" className="rounded-lg border-slate-200 text-slate-500 font-bold px-3 py-1 text-[10px] uppercase tracking-wider">{user.role}</Badge>
-                    </TableCell>
                     <TableCell className="text-right p-6">
                       <div className="flex items-center justify-end gap-2">
-                        <span className="text-xl font-black text-slate-900">{user.points.toLocaleString()}</span>
+                        <span className="text-xl font-black text-slate-900">{(member.totalPoints || 0).toLocaleString()}</span>
                         <Leaf className="h-4 w-4 text-green-500" />
                       </div>
                     </TableCell>
