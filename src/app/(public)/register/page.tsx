@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { authService } from '@/services/auth.service';
+import { register } from '@/actions/auth.actions';
 import { useAuthStore } from '@/store/useAuthStore';
 
 const registerSchema = z.object({
@@ -56,25 +56,45 @@ export default function RegisterPage() {
     setIsLoading(true);
     try {
       const formData = new FormData();
-      formData.append('name', values.name);
-      formData.append('email', values.email);
-      formData.append('password', values.password);
-      formData.append('role', 'MEMBER'); // Default role
+      const userData = {
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        role: 'MEMBER'
+      };
+      formData.append('data', JSON.stringify(userData));
+      
       if (file) {
         formData.append('file', file);
       }
 
-      const response = await authService.register(formData);
+      const response = await register(formData);
       
       if (response.success) {
-        setUser(response.data.user);
-        setToken(response.data.accessToken);
-        localStorage.setItem('token', response.data.accessToken);
+        // Handle both flat and nested response structures
+        const responseData = response.data?.data || response.data;
+        const user = responseData?.user || responseData?.member;
+        const accessToken = responseData?.accessToken;
+        const sessionToken = responseData?.token;
+
+        if (!user || (!accessToken && !sessionToken)) {
+          throw new Error('Invalid response from server');
+        }
+
+        // Set state for client-side usage if needed
+        setUser(user);
+        setToken(accessToken || sessionToken);
+        
+        if (accessToken) localStorage.setItem('accessToken', accessToken);
+
+        
         toast.success('Registration successful! Welcome to Green Pulse.');
         router.push('/dashboard/member');
+      } else {
+        toast.error(response.error?.message || 'Registration failed. Please try again.');
       }
     } catch (error: any) {
-      toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
+      toast.error(error.message || 'An unexpected error occurred. Please try again later.');
     } finally {
       setIsLoading(false);
     }

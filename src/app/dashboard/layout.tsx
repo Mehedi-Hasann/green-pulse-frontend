@@ -14,20 +14,38 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthenticated, isLoading, user } = useAuthStore();
+  const { isAuthenticated, isLoading, user, isHydrated } = useAuthStore();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.push('/login');
+    if (isHydrated && !isLoading) {
+      if (!isAuthenticated) {
+        router.push('/login');
+      } else if (user) {
+        const pathname = window.location.pathname;
+        // Strict role-based protection
+        if (pathname.startsWith('/dashboard/admin') && user.role !== 'ADMIN' && user.role !== 'SUPER_ADMIN') {
+          router.push('/dashboard/member');
+        } else if (pathname.startsWith('/dashboard/super-admin') && user.role !== 'SUPER_ADMIN') {
+          router.push(user.role === 'ADMIN' ? '/dashboard/admin' : '/dashboard/member');
+        } else if (pathname === '/dashboard') {
+           // Default redirect if exactly on /dashboard
+           if (user.role === 'SUPER_ADMIN') router.push('/dashboard/super-admin');
+           else if (user.role === 'ADMIN') router.push('/dashboard/admin');
+           else router.push('/dashboard/member');
+        }
+      }
     }
-  }, [isAuthenticated, isLoading, router]);
+  }, [isAuthenticated, isLoading, user, router, isHydrated]);
 
-  if (isLoading) {
+  if (!isHydrated || isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-green-600" />
+      <div className="flex h-screen items-center justify-center bg-slate-50">
+        <div className="flex flex-col items-center space-y-4">
+          <Loader2 className="h-10 w-10 animate-spin text-green-600" />
+          <p className="text-sm font-medium text-slate-500">Securing your session...</p>
+        </div>
       </div>
     );
   }

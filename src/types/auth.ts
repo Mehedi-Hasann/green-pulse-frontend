@@ -25,7 +25,9 @@ export interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  isHydrated: boolean;
   setUser: (user: IUser | null) => void;
   setToken: (token: string | null) => void;
+  setHydrated: () => void;
   logout: () => void;
 }
