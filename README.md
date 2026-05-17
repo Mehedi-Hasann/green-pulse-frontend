@@ -1,8 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Green Pulse Frontend
 
-## Getting Started
+Green Pulse is a modern web application designed to manage challenges, submissions, members, and projects. This repository contains the frontend application built with Next.js, providing a fast, responsive, and interactive user experience for both public users, members, and administrators.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+- **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
+- **Library:** [React 19](https://react.dev/)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
+- **State Management:** [Zustand](https://zustand-demo.pmnd.rs/) & [React Query](https://tanstack.com/query/latest)
+- **Forms & Validation:** [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
+- **Charts:** [Recharts](https://recharts.org/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+
+## ✨ Features
+
+- **Public Views:** Explore projects and login.
+- **Member Dashboard:** Track points, view active challenges, and submit project URLs.
+- **Admin Dashboard:** Comprehensive control panel with analytics (Recharts), member management, challenge creation, and submission reviews.
+- **Responsive Design:** Optimized for all devices using Tailwind CSS.
+- **Dynamic Routing:** Centralized data store and dynamic pages for projects and challenges.
+- **Secure Authentication:** JWT-based authentication flow.
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+- Node.js (v20+ recommended)
+- npm, yarn, or pnpm
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd green-pulse-frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+
+### Environment Variables
+
+Create a `.env` or `.env.local` file in the root directory based on the `.env.example`:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
+```
+*(Note: Change the URL to your production backend API when deploying.)*
+
+### Running Locally
+
+Start the development server:
 
 ```bash
 npm run dev
@@ -10,27 +65,33 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📂 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+├── public/             # Static assets
+├── src/
+│   ├── app/            # Next.js App Router (Public, Member, Admin routes)
+│   ├── components/     # Reusable UI components & modules
+│   ├── lib/            # Utility functions
+│   ├── hooks/          # Custom React hooks
+│   └── store/          # Zustand state management
+├── .env.example        # Environment variables template
+├── tailwind.config.ts  # Tailwind CSS configuration
+└── package.json        # Project metadata and dependencies
+```
 
-## Learn More
+## 🚀 Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This application is optimized for deployment on [Vercel](https://vercel.com).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Push your code to a GitHub/GitLab/Bitbucket repository.
+2. Import the project in Vercel.
+3. Add the `NEXT_PUBLIC_API_URL` environment variable.
+4. Deploy!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔗 Related Repositories
+- **Backend:** [Link to Backend Repo] (Replace with actual link if available)
