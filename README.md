@@ -27,16 +27,7 @@ Green Pulse provides a unified platform where members can easily view active cha
 - **Analytics Dashboard:** Visual representation of platform engagement, submission statuses, and user growth using Recharts.
 - **Dynamic Routing:** Scalable page architecture for handling individual project showcases and detailed challenge descriptions.
 
-## 5. Screenshots
-
-*(Add screenshots of your application here)*
-
-<!-- Example:
-![Home Page](/screenshots/home.png)
-![Admin Dashboard](/screenshots/admin-dashboard.png)
--->
-
-## 6. Setup Instructions
+## 5. Setup Instructions
 
 1. **Clone the repository:**
    ```bash
@@ -65,7 +56,7 @@ Green Pulse provides a unified platform where members can easily view active cha
 4. **Open the app:**
    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 7. Environment Variables
+## 6. Environment Variables
 
 Create a `.env` or `.env.local` file in the root directory based on the `.env.example`:
 
@@ -77,24 +68,14 @@ NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
 # NEXT_PUBLIC_API_URL=https://your-production-backend.com/api/v1
 ```
 
-## 8. API / Architecture
+## 7. API / Architecture
 
 The Next.js frontend follows a decoupled architecture, communicating with a RESTful backend API built with Node.js, Express, and Prisma. 
 - **Data Fetching:** [TanStack React Query](https://tanstack.com/query/latest) is used for efficient server state management, caching, and background synchronization.
 - **State Management:** Local client state (like UI toggles and persistent user preferences) is managed via [Zustand](https://zustand-demo.pmnd.rs/).
 - **Routing:** Built on the modern Next.js App Router paradigm utilizing server components alongside client components for optimal performance and SEO.
 
-## 9. Live Demo & Credentials
+## 8. Live Demo & Credentials
 
 - **Live Application:** [https://green-pulse-frontend.vercel.app/](https://green-pulse-frontend.vercel.app/)
 - **Backend Repository:** [https://github.com/Mehedi-Hasann/green_pulse_backend](https://github.com/Mehedi-Hasann/green_pulse_backend)
-
-### Test Credentials
-*(If you have test accounts for reviewers, you can provide them below)*
-
-- **Admin Account:** 
-  - Email: `admin@example.com`
-  - Password: `password123`
-- **Member Account:** 
-  - Email: `member@example.com`
-  - Password: `password123`
