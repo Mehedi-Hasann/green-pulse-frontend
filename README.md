@@ -31,7 +31,7 @@ Green Pulse provides a unified platform where members can easily view active cha
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Mehedi-Hasann/green-pulse-frontend/tree/main
    cd green-pulse-frontend
    ```
 
