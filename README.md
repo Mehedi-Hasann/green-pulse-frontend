@@ -1,9 +1,16 @@
-# Green Pulse Frontend
+# Green Pulse
 
-Green Pulse is a modern web application designed to manage challenges, submissions, members, and projects. This repository contains the frontend application built with Next.js, providing a fast, responsive, and interactive user experience for both public users, members, and administrators.
+**Green Pulse is a dynamic web application built to manage and track community challenges, user submissions, and member projects.**
 
-## 🚀 Tech Stack
+---
 
+## 1. Problem Statement
+Managing community-driven projects, tracking member participation in various challenges, and reviewing submissions can be disorganized and time-consuming without a centralized platform. Organizations and administrators often lack clear visibility into user engagement, making it difficult to reward contributions and monitor overall progress efficiently.
+
+## 2. Solution
+Green Pulse provides a unified platform where members can easily view active challenges, submit their work (such as project URLs), and track their reward points. Administrators are equipped with a powerful dashboard featuring data visualization to effortlessly manage user accounts, create new challenges, and securely review member submissions.
+
+## 3. Tech Stack
 - **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
 - **Library:** [React 19](https://react.dev/)
 - **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
@@ -13,31 +20,31 @@ Green Pulse is a modern web application designed to manage challenges, submissio
 - **Charts:** [Recharts](https://recharts.org/)
 - **Animations:** [Framer Motion](https://www.framer.com/motion/)
 
-## ✨ Features
+## 4. Key Features
+- **Role-Based Access Control:** Distinct views and permissions for Public users, Members, and Administrators.
+- **Member Dashboard:** Personalized space for users to track accumulated points, browse active challenges, and submit project links.
+- **Admin Control Panel:** Comprehensive management of challenges, categories, submissions, and member accounts.
+- **Analytics Dashboard:** Visual representation of platform engagement, submission statuses, and user growth using Recharts.
+- **Dynamic Routing:** Scalable page architecture for handling individual project showcases and detailed challenge descriptions.
 
-- **Public Views:** Explore projects and login.
-- **Member Dashboard:** Track points, view active challenges, and submit project URLs.
-- **Admin Dashboard:** Comprehensive control panel with analytics (Recharts), member management, challenge creation, and submission reviews.
-- **Responsive Design:** Optimized for all devices using Tailwind CSS.
-- **Dynamic Routing:** Centralized data store and dynamic pages for projects and challenges.
-- **Secure Authentication:** JWT-based authentication flow.
+## 5. Screenshots
 
-## ⚙️ Getting Started
+*(Add screenshots of your application here)*
 
-### Prerequisites
+<!-- Example:
+![Home Page](/screenshots/home.png)
+![Admin Dashboard](/screenshots/admin-dashboard.png)
+-->
 
-- Node.js (v20+ recommended)
-- npm, yarn, or pnpm
+## 6. Setup Instructions
 
-### Installation
-
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
    git clone <repository-url>
    cd green-pulse-frontend
    ```
 
-2. Install dependencies:
+2. **Install dependencies:**
    ```bash
    npm install
    # or
@@ -46,52 +53,48 @@ Green Pulse is a modern web application designed to manage challenges, submissio
    pnpm install
    ```
 
-### Environment Variables
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
+
+4. **Open the app:**
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 7. Environment Variables
 
 Create a `.env` or `.env.local` file in the root directory based on the `.env.example`:
 
 ```env
+# Example for local development
 NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
-```
-*(Note: Change the URL to your production backend API when deploying.)*
 
-### Running Locally
-
-Start the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# Example for production
+# NEXT_PUBLIC_API_URL=https://your-production-backend.com/api/v1
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 8. API / Architecture
 
-## 📂 Project Structure
+The Next.js frontend follows a decoupled architecture, communicating with a RESTful backend API built with Node.js, Express, and Prisma. 
+- **Data Fetching:** [TanStack React Query](https://tanstack.com/query/latest) is used for efficient server state management, caching, and background synchronization.
+- **State Management:** Local client state (like UI toggles and persistent user preferences) is managed via [Zustand](https://zustand-demo.pmnd.rs/).
+- **Routing:** Built on the modern Next.js App Router paradigm utilizing server components alongside client components for optimal performance and SEO.
 
-```
-├── public/             # Static assets
-├── src/
-│   ├── app/            # Next.js App Router (Public, Member, Admin routes)
-│   ├── components/     # Reusable UI components & modules
-│   ├── lib/            # Utility functions
-│   ├── hooks/          # Custom React hooks
-│   └── store/          # Zustand state management
-├── .env.example        # Environment variables template
-├── tailwind.config.ts  # Tailwind CSS configuration
-└── package.json        # Project metadata and dependencies
-```
+## 9. Live Demo & Credentials
 
-## 🚀 Deployment
+- **Live Application:** [https://green-pulse-frontend.vercel.app/](https://green-pulse-frontend.vercel.app/)
+- **Backend Repository:** [https://github.com/Mehedi-Hasann/green_pulse_backend](https://github.com/Mehedi-Hasann/green_pulse_backend)
 
-This application is optimized for deployment on [Vercel](https://vercel.com).
+### Test Credentials
+*(If you have test accounts for reviewers, you can provide them below)*
 
-1. Push your code to a GitHub/GitLab/Bitbucket repository.
-2. Import the project in Vercel.
-3. Add the `NEXT_PUBLIC_API_URL` environment variable.
-4. Deploy!
-
-## 🔗 Related Repositories
-- **Backend:** [Link to Backend Repo] (Replace with actual link if available)
+- **Admin Account:** 
+  - Email: `admin@example.com`
+  - Password: `password123`
+- **Member Account:** 
+  - Email: `member@example.com`
+  - Password: `password123`
